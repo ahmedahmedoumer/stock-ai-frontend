@@ -1,4 +1,8 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+
+if (!API_BASE) {
+  throw new Error('NEXT_PUBLIC_API_URL is not set. Add it to .env.local.');
+}
 
 function readMessage(body: unknown, fallback: string) {
   if (body && typeof body === 'object' && 'message' in body) {
